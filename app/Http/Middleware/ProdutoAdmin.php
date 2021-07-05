@@ -16,6 +16,9 @@ class ProdutoAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if($request->session()->exists('login')){
+            return $next($request);
+        }
+        return redirect()->route('negado');
     }
 }
